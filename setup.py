@@ -2,8 +2,8 @@ from setuptools import setup
 
 setup(
     name="passwordgenerator",
-    version='1.0',
-    description='passwordgeneratorTool',
+    version='1.0.0',
+    description='passwordgeneratortool',
     author='Anima8',
     url='https://github.com/Anima8/password-generator',
     license='MIT',
