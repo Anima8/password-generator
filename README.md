@@ -1,5 +1,8 @@
-How to use the password generator
+How to use the password generatortool
 
 1.Enter a number from 0 to 30 in the input field.
 
-2.Close the application with close on the menu bar.
+
+パスワード生成ツールの使い方
+
+1.入力フィールドに0〜30の数値を入力します。
