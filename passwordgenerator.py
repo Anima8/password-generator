@@ -5,7 +5,9 @@ import secrets
 from tkinter import messagebox
 
 def main():
+     #Tkクラスをインスタンス化
     window = tk.Tk()
+     #ウィンドウの変更を無効
     window.resizable(False, False)
 
     #フレームのタイトルを決める
@@ -17,28 +19,20 @@ def main():
     men = tk.Menu(window)
     window.config(menu=men)
 
-    def on_closing():
-
-        if messagebox.askokcancel("Quit", "Do you want to quit?"):
-            window.destroy()
-        else:
-            pass
-
     #メニューバーのcloseをクリックした際の処理
     def on_version():
         #versionを表示する
-        messagebox.showinfo("version","version:1.0") 
+        messagebox.showinfo("Version","Ver:1.0.0") 
 
     #メニューバーのHelpをクリックした際の処理
     def on_help():
         #使い方を表示する
-        messagebox.showinfo("Help","・How to use the password generator \n 1.Enter a number from 0 to 30 in the input field. \n 2.Close the application with close on the menu bar.") 
-        #Tkクラスをインスタンス化
-
-    #メニューバーにClose,Version,Help項目を追加
-    men.add_command(label='Close',command=on_closing)
+        messagebox.showinfo("Help","・How to use the password generator tool \n 1.Enter a number from 0 to 30 in the input field. \n ・パスワード生成ツールの使い方 \n 1.入力欄に0〜30の数字を入力してください。") 
+    
+    #メニューバーにVersion,Help項目を追加
     men.add_command(label='Version',command=on_version)
     men.add_command(label='Help',command=on_help)
+
     #入力できるテキストの生成
     text = tk.Text()
     #ウイジェットの生成
@@ -67,6 +61,7 @@ def main():
                 text.configure(state='normal')
                 #テキストをClear
                 text.delete("1.0","end")
+            
             #最初に0が入力されたらエラーメッセージを表示
             elif int(inputText) == 0:
                 messagebox.showinfo("Error message", "Please enter the correct characters (Example 1 to 30)")
@@ -75,6 +70,7 @@ def main():
                 text.configure(state='normal')
                 #テキストをClear
                 text.delete("1.0","end")
+            
             #3桁以上はエラーメッセージを表示
             elif int(inputText) >= 31:
                 messagebox.showinfo("Error message", "Please enter a number within 30 characters") 
@@ -84,6 +80,7 @@ def main():
                 text.configure(state='normal')
                 #テキストをClear
                 text.delete("1.0","end")
+            
         except:
             #数字以外が入力された場合にエラーメッセージを表示
             messagebox.showinfo("Error message", "Please enter the correct characters (Example 1 to 30)") 
@@ -116,11 +113,14 @@ def main():
                 messagebox.showinfo("Error message", "Please enter the correct characters (Example 1 to 30)") 
                 inpt.delete(0, tk.END)
                 text.configure(state='disabled')
+            
             #入力ボックスが31以上の場合エラーメッセージを表示
             elif int(n) >= 31:
                 messagebox.showinfo("Error message", "Please enter a number within 30 characters") 
                 inpt.delete(0, tk.END)
                 text.configure(state='disabled')
+            
+            #ランダムに文字を出力
             else:
                 #入力ボックスに入力された回数をランダムに格納された文字列を出力
                 text.insert('1.0', ''.join([secrets.choice(st.ascii_letters + st.digits + '!' + '#'+ '$' + '%' + '&' + ')' + '(' ) for i in range(int(n))]))
@@ -160,11 +160,8 @@ def main():
     #テキストの入力を無効
     text.configure(state='disabled')
 
-    #Windowの×ボタンを無効化
-    window.protocol('WM_DELETE_WINDOW', (lambda: 'pass'))
+    #ウィンドウを開いたままにして待機
     window.mainloop()
-
-
 
 if __name__ == '__main__':
     main()
