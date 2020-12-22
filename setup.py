@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="passwordgenerator",
-    version='1.0.0',
+    version='1.0.2',
     description='passwordgeneratortool',
     author='Anima8',
     url='https://github.com/Anima8/password-generator',
