@@ -22,7 +22,7 @@ def main():
     #メニューバーのcloseをクリックした際の処理
     def on_version():
         #versionを表示する
-        messagebox.showinfo("Version","Ver:1.0.1") 
+        messagebox.showinfo("Version","Ver:1.0.2") 
 
     #メニューバーのHelpをクリックした際の処理
     def on_help():
@@ -213,7 +213,8 @@ def main():
 
     def btn_click2():
         #1行目にあるパスワードをコピー
-        copy = text.get("1.0","end")
+        #int(inputText)
+        copy = text.get("1.0","end"+"-1c")
         #クリックボードに貼り付ける
         pyperclip.copy(copy)
     
