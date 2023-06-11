@@ -3,18 +3,21 @@ import string as st
 import pyperclip
 import secrets
 from tkinter import messagebox
+import tkinter.filedialog
+from tkinterdnd2 import *
+import pyminizip
 
 def main():
 
     #メニューバーのcloseをクリックした際の処理
     def on_version():
         #versionを表示する
-        messagebox.showinfo("バージョン","Ver:1.0.3") 
+        messagebox.showinfo("バージョン","Ver:1.0.5") 
 
     #メニューバーのHelpをクリックした際の処理
     def on_help():
         #使い方を表示
-        messagebox.showinfo("ヘルプ","・パスワード生成ツールの使い方 \n 1.入力フィールドに1〜30の数値を入力できます。 \n 2.更新ボタンで表示されているパスワードを更新できます。 \n 3.コピーボタンでクリップボードにコピーされます。 \n 4.入力条件の変更ができます。(英字, 英字と数字 \n 先頭大文字,数字と記号)が選択できます。\n 5.デフォルトの設定に戻すには「リセット」ボタンを押してください。") 
+        messagebox.showinfo("ヘルプ","・パスワード生成ツールの使い方 \n 1.入力フィールドに1〜30の数値を入力できます。 \n 2.更新ボタンで表示されているパスワードを更新できます。 \n 3.コピーボタンでクリップボードにコピーされます。 \n 4.入力条件の変更ができます。(英字, 英字と数字 \n 先頭大文字,数字と記号)が選択できます。\n 5.デフォルトの設定に戻すには「リセット」ボタンを押してください。\n 6.「ファイル選択とzipファイル生成」ボタンでファイル選択後にパスワード付zipファイルが生成されます。注意(ファイル1つのみ選択でき、ディレクトリは選択できません。また添付ファイル名はお好きな名前に変更してください。)") 
 
     #LettersOnlyのボタンが選択された際の処理
     def chk1():
@@ -61,6 +64,17 @@ def main():
         global checkFlg
         checkFlg = 0
         return checkFlg
+    
+       #zipFile生成ボタンがクリックされた際の処理
+    def btn6_click():
+        
+        #1行目にあるパスワードをコピー
+        copyin = text.get("1.0","end"+"-1c")
+        #クリックボードに貼り付ける
+        pyperclip.copy(copyin)
+        src = tkinter.filedialog.askopenfilename()
+        pyminizip.compress(src.encode('cp932'), "".encode('cp932'), "attached.zip".encode('cp932'), copyin.encode('cp932'), 9)
+        messagebox.showinfo("メッセージ", "パスワード付きzipファイルがツールと同じディレクトリに生成されました。") 
 
     #Entry入力ボックスの数値を判定
     def inputevent(event):
@@ -198,6 +212,10 @@ def main():
         #のボタンのエンター押下処理
     def Enter_hand7(event):
         btn4_click()
+
+        #のボタンのエンター押下処理  
+    def Enter_hand8(event):
+        btn6_click()
     
     #オプション用のグローバル変数
     global checkFlg
@@ -213,7 +231,7 @@ def main():
     window.title("PasswordGenerator")
 
     #フレームの幅を選択する
-    window.geometry("355x120")
+    window.geometry("400x150")
 
     #menの変数にtk.Menuをインスタンス化し代入
     men = tk.Menu(window)
@@ -234,6 +252,7 @@ def main():
 
     #入力ボックスのボタン配置設定
     inpt.place(x=10, y=30)
+
     #入力ボックスに20を表示する
     inpt.insert(0,"20")
     
@@ -271,6 +290,10 @@ def main():
     #Resetボタンを生成
     btn4 = tk.Button(window, text='リセット', command=btn4_click)
     btn4.place(x=268, y=72)
+
+    #zipFileボタン生成
+    btn6 = tk.Button(window, text='ファイル選択とzipファイル生成', command=btn6_click)
+    btn6.place(x=5, y=110)
   
     #PasswordReload,PasswordCopyと各オプションボタンのEnter押下時のバインド処理
     btn.bind("<Return>",Enter_hand)
@@ -280,9 +303,11 @@ def main():
     check3.bind("<Return>",Enter_hand5)
     check4.bind("<Return>",Enter_hand6)
     btn4.bind("<Return>",Enter_hand7)
+    btn6.bind("<Return>",Enter_hand8)
 
     #テキストの入力を無効
     text.configure(state='disabled')
+
     #ウィンドウを開いたままにして待機
     window.mainloop()
 
