@@ -1,0 +1,44 @@
+MITライセンス
+
+Copyright（c）2020 Anima8
+
+これにより、コピーを取得するすべての人に無料で許可が与えられます
+このソフトウェアおよび関連するドキュメントファイル（以下「ソフトウェア」）の
+権利を含むがこれに限定されない制限なしのソフトウェア
+使用、コピー、変更、マージ、公開、配布、サブライセンス、および/または販売するため
+ソフトウェアのコピー、およびソフトウェアの対象者を許可する
+次の条件に従って、そのように提供されます。
+
+上記の著作権表示とこの許可通知は、すべてに含まれるものとします。
+ソフトウェアのコピーまたは実質的な部分。
+
+本ソフトウェアは「現状有姿」で提供され、明示または明示的ないかなる種類の保証もありません。
+黙示的、商品性の保証に限らず、
+特定の目的と非侵害への適合性。いかなる場合も
+作者または著作権者は、請求、損害またはその他の責任を負います
+責任、契約の行為、不法行為、またはその他のいずれに起因するか、
+ソフトウェアまたはその使用またはその他の取引に関連して、またはソフトウェア。
+
+------------------------------------------------------------------------------------------
+
+MIT License
+
+Copyright (c) 2020 Anima8
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
