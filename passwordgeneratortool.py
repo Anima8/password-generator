@@ -5,21 +5,25 @@ import secrets
 from tkinter import messagebox
 import tkinter.filedialog
 from tkinterdnd2 import *
-import pyminizip
 import os
 import hashlib
+from zipfile import ZipFile 
 
 def main():
 
     #メニューバーのcloseをクリックした際の処理
     def on_version():
         #versionを表示する
-        messagebox.showinfo("バージョン","Ver:1.0.6") 
+        messagebox.showinfo("バージョン","Ver:1.0.8") 
 
     #メニューバーのHelpをクリックした際の処理
     def on_help():
         #使い方を表示
-        messagebox.showinfo("ヘルプ","・パスワード生成ツールの使い方 \n 1.入力フィールドに1〜30の数値を入力できます。 \n 2.更新ボタンで表示されているパスワードを更新できます。 \n 3.コピーボタンでクリップボードにコピーされます。 \n 4.入力条件の変更ができます。(英字, 英字と数字 \n 先頭大文字,数字と記号)が選択できます。\n 5.デフォルトの設定に戻すには「リセット」ボタンを押してください。\n 6.「ファイル選択とzipファイル生成」ボタンでファイル選択後にパスワード付zipファイルが生成されます。注意(ファイル1つのみ選択でき、ディレクトリは選択できません。\n 7.ハッシュ値元を入力後、ハッシュ生成ボタンを入力するとハッシュ値が生成されます。)") 
+        messagebox.showinfo("ヘルプ","・パスワード生成ツールの使い方 \n 1.入力フィールドに1〜30の数値を入力できます。 \n 2.更新ボタンで表示されているパスワードを更新できます。 \n 3.コピーボタンでクリップボードにコピーされます。 \n 4.入力条件の変更ができます。(英字, 英字と数字 \n 先頭大文字,数字と記号)が選択できます。\n 5.デフォルトの設定に戻すには「リセット」ボタンを押してください。\n 6.ハッシュ値元を入力後、ハッシュ生成ボタンを入力するとハッシュ値が生成されます。)") 
+
+    def on_help2():
+        #使い方を表示
+        messagebox.showinfo("注意事項","パスワード生成のみなので圧縮ソフトを別途ご利用ください") 
 
     #LettersOnlyのボタンが選択された際の処理
     def chk1():
@@ -73,25 +77,9 @@ def main():
         #1行目にあるパスワードをコピー
         copyin = text.get("1.0","end"+"-1c")
 
-        src = tkinter.filedialog.askopenfilename(title="制限:ファイル単体のみ選択できます。")
-        filepath = src
-        #ファイル名のみbasenameに格納
-        basename = os.path.splitext(os.path.basename(filepath))[0]
-        pyminizip.compress(src.encode('cp932'), "".encode('cp932'), ".zip".encode('cp932'), copyin.encode('cp932'), 9)
-
-        dirs = os.getcwd()
-        target_path_1 = dirs + "\\" + ".zip"
-        target_path_3 = dirs + "\\" + basename + ".zip"
-        try:
-            os.remove(target_path_3)
-        except:
-            pass
-
-        os.rename(target_path_1, target_path_3)
         #クリックボードに貼り付ける
         pyperclip.copy(copyin)
-        messagebox.showinfo("メッセージ", "パスワード付きzipファイルがツールと同じディレクトリに生成されました。パスワードもクリップボードにコピーされました。") 
-        os.remove(target_path_1)
+        messagebox.showinfo("メッセージ", "パスワードがクリップボードにコピーされました。(windowsキーとVでコピー等の履歴が確認できます。)") 
 
 
     #ハッシュ生成ボタンがクリックされた際の処理
@@ -208,7 +196,7 @@ def main():
         #クリックボードに貼り付ける
         pyperclip.copy(copy)
         #コピーされたことを表示
-        messagebox.showinfo("", "クリップボードにコピーされました。") 
+        messagebox.showinfo("", "パスワードがクリップボードにコピーされました。(windowsキーとVでクリップボードの履歴が確認できます。") 
     
     ##PasswordReloadのボタンのエンター押下処理
     def Enter_hand(event):
@@ -269,6 +257,7 @@ def main():
     #メニューバーにVersion,Helpの項目を追加
     men.add_command(label='バージョン',command=on_version)
     men.add_command(label='ヘルプ',command=on_help)
+    men.add_command(label='【注意事項:パスワード生成のみなので圧縮ソフトを別途ご利用ください】',command=on_help2)
 
     #入力できるテキストの生成
     text = tk.Text()
@@ -329,14 +318,11 @@ def main():
     btn4 = tk.Button(window, text='リセット', command=btn4_click)
     btn4.place(x=268, y=72)
 
-    #zipFileボタン生成
-    btn6 = tk.Button(window, text='ファイル選択とzipファイル生成(制限あり:ファイル単体のみ可能)', command=btn6_click)
-    btn6.place(x=10, y=110)
-
     #ハッシュ生成ボタン生成
     btn7 = tk.Button(window, text='ハッシュ値生成', command=btn7_click)
     btn7.place(x=370, y=30)
-  
+
+
     #PasswordReload,PasswordCopyと各オプションボタンのEnter押下時のバインド処理
     btn.bind("<Return>",Enter_hand)
     btn2.bind("<Return>",Enter_hand2)
@@ -345,7 +331,6 @@ def main():
     check3.bind("<Return>",Enter_hand5)
     check4.bind("<Return>",Enter_hand6)
     btn4.bind("<Return>",Enter_hand7)
-    btn6.bind("<Return>",Enter_hand8)
     btn7.bind("<Return>",Enter_hand9)
 
     #テキストの入力を無効
